@@ -1,0 +1,128 @@
+:root{
+  --bg:#0b1220; --card:#121a2b; --muted:#93a3b8; --text:#e9eef9; --accent:#6ee7b7; --warn:#ffb020; --bad:#ff6b6b; --good:#38bdf8;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter,system-ui,Segoe UI,Roboto,Arial,Helvetica,sans-serif;
+  background:linear-gradient(180deg,#0a1020,#0e1830);
+  color:var(--text)
+}
+header{
+  position:sticky;
+  top:0;
+  background:rgba(11,18,32,.85);
+  backdrop-filter:saturate(140%) blur(8px);
+  border-bottom:1px solid #1e293b
+}
+.wrap{max-width:1200px;margin:0 auto;padding:18px}
+h1{margin:0;font-size:clamp(18px,2.6vw,28px);display:flex;gap:10px;align-items:center}
+.grid{display:grid;gap:16px}
+.controls{grid-template-columns:1fr}
+.row{display:flex;gap:12px;flex-wrap:wrap; }
+.card{background:var(--card);border:1px solid #1f2a44;border-radius:16px;padding:14px}
+label{font-size:14px;color:var(--muted)}
+select,input,button{background:#091226;border:1px solid #1f2a44;color:var(--text);padding:10px 12px;border-radius:10px;font-size:14px;outline:none}
+button{cursor:pointer;transition:.2s ease;}
+button:hover{transform:translateY(-1px)}
+.kpi{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  width: 160%; /* šire za 30px */
+  margin-left:-70%
+}
+.kpi .item{background:#0b1530;border:1px solid #243552;padding:12px;border-radius:14px;}
+.kpi .val{font-size:16px;font-weight:700}
+.status.ok{color:var(--accent)}
+.status.bad{color:var(--bad)}
+canvas{width:100%;height:240px;background:#0a1328;border:1px solid #1e2c4a;border-radius:14px}
+table{width:100%;border-collapse:separate;border-spacing:0 10px}
+th,td{text-align:left;padding:6px 8px}
+tbody tr{background:#0a142c;border:1px solid #1f2a44}
+tbody tr td:first-child{border-top-left-radius:10px;border-bottom-left-radius:10px}
+tbody tr td:last-child{border-top-right-radius:10px;border-bottom-right-radius:10px}
+.alerts{max-height:220px;overflow:auto}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;border:1px solid #27405a;background:#0a162d}
+.pill.bad{border-color:#5b1e2a;background:#1a0b11;color:#ff9aa9}
+.pill.warn{border-color:#5b4a1e;background:#1a150b;color:#ffd38a}
+.legend{display:flex;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+footer{opacity:.7;padding:10px 0;font-size:12px;text-align:center}
+
+
+
+@media(min-width:901px){
+  .grid.main{grid-template-columns:2fr 1fr}
+  .controls{grid-template-columns:2fr 1fr}
+    .kpi{
+    width:100% !important;
+    grid-template-columns:1fr;
+    margin-left:0; /* nema pomjeranja */
+  }
+}
+
+
+
+@media(max-width: 470px) {
+    .polje{width: 90%;}
+  .wrap{padding:8px}
+  h1{font-size:14px}
+
+  .kpi{
+    grid-template-columns:1fr;
+    width:100% !important;
+    margin-left:0;
+  }
+
+    .kpi .item{
+   
+    width:75% !important;
+
+  }
+
+  .kpi .val{font-size:13px}
+
+  canvas{
+    max-width:100% !important;
+    height:140px;  /* još manja visina */
+  }
+  .plot-wrapper{
+    width:75%;
+    overflow-x:auto;   /* ako chart probije, dozvoli skrol */
+  }
+
+  table th, table td{font-size:11px}
+  .pill{font-size:11px;padding:3px 6px}
+}
+
+
+@media(max-width: 900px){
+  .wrap{padding:10px}
+  h1{font-size:16px}
+
+  .kpi{
+    width:100% !important;
+    grid-template-columns:1fr;
+    margin-left:0; 
+  }
+  .kpi .item{padding:10px}
+  .kpi .val{font-size:14px}
+
+  .row{flex-direction:column;gap:8px}
+  .card{padding:10px}
+
+  select,input,button{font-size:12px;padding:8px 10px}
+
+  /* Plot sekcija */
+  canvas{
+    width:100% !important;
+    height:160px;  /* manja visina */
+    display:block;
+  }
+  .plot-wrapper{
+    overflow-x:auto; /* ako plot pređe širinu, pojavi se horizontalni scroll */
+  }
+
+  table th, table td{padding:4px 6px;font-size:12px}
+  .pill{font-size:12px;padding:4px 8px}
+}

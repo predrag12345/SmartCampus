@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="sr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Smart Campus – IoT nadzor (mock)</title>
+ 
+  <link rel="stylesheet" href="style.css">
+  
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Smart Campus</h1>
+  </div>
+</header>
+
+<main class="wrap grid main">
+  <!-- LEVA KOLONA: grafikoni i status -->
+  <section class="grid" style="gap:16px">
+    <div class="card grid controls">
+      <div class="row">
+        <div>
+          <label for="deviceSel">Uređaj</label><br>
+          <select id="deviceSel">
+            <option value="dev1">Uređaj 1</option>
+            <option value="dev2">Uređaj 2</option>
+          </select>
+        </div>
+        <div>
+          <label>Period</label><br>
+          <span class="pill">Poslednja 24h</span>
+        </div>
+
+      </div>
+      <div class="kpi" id="kpi">
+        <!-- KPI kartice se pune iz JS-a -->
+      </div>
+      <div class="legend">
+        <span class="pill">✔️ u granicama</span>
+        <span class="pill bad">⛔ izvan granica</span>
+        <span class="pill warn">— prag (min/max)</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">Temperatura (°C)</h3>
+      <canvas id="chart-temp"></canvas>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Pritisak (hPa)</h3>
+      <canvas id="chart-press"></canvas>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Vlažnost (%)</h3>
+      <canvas id="chart-hum"></canvas>
+    </div>
+  </section>
+
+  <!-- DESNA KOLONA: pragovi i alarmi -->
+  <aside class="grid" style="gap:16px">
+    <div class="card">
+      <h3 style="margin-top:0">Opšte stanje</h3>
+      <div id="overall" class="status">—</div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">Podešavanje pragova senzora</h3>
+      <p class="muted" style="margin-top:-8px;color:var(--muted)">Unesite donju i gornju granicu.</p>
+      <table>
+        <thead>
+          <tr><th>Parametar</th><th>Min</th><th>Max</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Temperatura (°C)</td>
+            <td><input id="min-temp" type="number" step="0.1" class="polje"/></td>
+            <td><input id="max-temp" type="number" step="0.1" class="polje" /></td>
+          </tr>
+          <tr>
+            <td>Pritisak (hPa)</td>
+            <td><input id="min-press" type="number" step="1" class="polje"/></td>
+            <td><input id="max-press" type="number" step="1" class="polje"/></td>
+          </tr>
+          <tr>
+            <td>Vlažnost (%)</td>
+            <td><input id="min-hum" type="number" step="1" class="polje"/></td>
+            <td><input id="max-hum" type="number" step="1" class="polje"/></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="row" style="justify-content:flex-end;margin-top:10px">
+        <button id="saveBtn">Sačuvaj pragove</button>
+        <button id="defaultsBtn">Podrazumevano</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">Obavještenja / Alarmi</h3>
+      <div class="alerts" id="alerts"></div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">Napomena</h3>
+      <ul style="margin-top:-4px">
+        <li>Ovaj demo koristi <b>mock</b> podatke (generišu se u JS‑u).</li>
+        <li>Predviđeno je da se kasnije zameni <b>InfluxDB ➝ PHP API</b> koji vraća merenja za poslednja 24h po uređaju.</li>
+        <li>Endpoint predlog: <code>/api/readings?device=dev1&hours=24</code></li>
+        <li>Endpoint za pragove: <code>GET/POST /api/thresholds</code></li>
+      </ul>
+    </div>
+  </aside>
+</main>
+
+<footer class="wrap">© Smart Campus 2025</footer>
+
+<script src="script.js"></script> 
+
+</body>
+</html>
